@@ -18,7 +18,7 @@
 ## Introduction
 
 ![Humorous image of software quality estimation as a count of how many expletives
-you shout when reading code](http://www.osnews.com/images/comics/wtfm.jpg)
+you shout when reading code](https://www.osnews.com/images/comics/wtfm.jpg)
 
 Software engineering principles, from Robert C. Martin's book
 [_Clean Code_](https://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882),
@@ -1830,9 +1830,9 @@ didn't break anything. Deciding on what constitutes an adequate amount is up
 to your team, but having 100% coverage (all statements and branches) is how
 you achieve very high confidence and developer peace of mind. This means that
 in addition to having a great testing framework, you also need to use a
-[good coverage tool](http://gotwarlost.github.io/istanbul/).
+[good coverage tool](https://gotwarlost.github.io/istanbul/).
 
-There's no excuse to not write tests. There are [plenty of good JS test frameworks](http://jstherightway.org/#testing-tools), so find one that your team prefers.
+There's no excuse to not write tests. There are [plenty of good JS test frameworks](https://jstherightway.org/#testing-tools), so find one that your team prefers.
 When you find one that works for your team, then aim to always write tests
 for every new feature/module you introduce. If your preferred method is
 Test Driven Development (TDD), that is great, but the main point is to just
@@ -1846,19 +1846,19 @@ or refactoring an existing one.
 ```javascript
 import assert from "assert";
 
-describe("MakeMomentJSGreatAgain", () => {
+describe("MomentJS", () => {
   it("handles date boundaries", () => {
     let date;
 
-    date = new MakeMomentJSGreatAgain("1/1/2015");
+    date = new MomentJS("1/1/2015");
     date.addDays(30);
     assert.equal("1/31/2015", date);
 
-    date = new MakeMomentJSGreatAgain("2/1/2016");
+    date = new MomentJS("2/1/2016");
     date.addDays(28);
     assert.equal("02/29/2016", date);
 
-    date = new MakeMomentJSGreatAgain("2/1/2015");
+    date = new MomentJS("2/1/2015");
     date.addDays(28);
     assert.equal("03/01/2015", date);
   });
@@ -1870,21 +1870,21 @@ describe("MakeMomentJSGreatAgain", () => {
 ```javascript
 import assert from "assert";
 
-describe("MakeMomentJSGreatAgain", () => {
+describe("MomentJS", () => {
   it("handles 30-day months", () => {
-    const date = new MakeMomentJSGreatAgain("1/1/2015");
+    const date = new MomentJS("1/1/2015");
     date.addDays(30);
     assert.equal("1/31/2015", date);
   });
 
   it("handles leap year", () => {
-    const date = new MakeMomentJSGreatAgain("2/1/2016");
+    const date = new MomentJS("2/1/2016");
     date.addDays(28);
     assert.equal("02/29/2016", date);
   });
 
   it("handles non-leap year", () => {
-    const date = new MakeMomentJSGreatAgain("2/1/2015");
+    const date = new MomentJS("2/1/2015");
     date.addDays(28);
     assert.equal("03/01/2015", date);
   });
@@ -1908,11 +1908,11 @@ import { writeFile } from "fs";
 
 get(
   "https://en.wikipedia.org/wiki/Robert_Cecil_Martin",
-  (requestErr, response) => {
+  (requestErr, response, body) => {
     if (requestErr) {
       console.error(requestErr);
     } else {
-      writeFile("article.html", response.body, writeErr => {
+      writeFile("article.html", body, writeErr => {
         if (writeErr) {
           console.error(writeErr);
         } else {
@@ -1927,12 +1927,12 @@ get(
 **Good:**
 
 ```javascript
-import { get } from "request";
-import { writeFile } from "fs";
+import { get } from "request-promise";
+import { writeFile } from "fs-extra";
 
 get("https://en.wikipedia.org/wiki/Robert_Cecil_Martin")
-  .then(response => {
-    return writeFile("article.html", response);
+  .then(body => {
+    return writeFile("article.html", body);
   })
   .then(() => {
     console.log("File written");
@@ -1956,11 +1956,11 @@ today!
 
 ```javascript
 import { get } from "request-promise";
-import { writeFile } from "fs-promise";
+import { writeFile } from "fs-extra";
 
 get("https://en.wikipedia.org/wiki/Robert_Cecil_Martin")
-  .then(response => {
-    return writeFile("article.html", response);
+  .then(body => {
+    return writeFile("article.html", body);
   })
   .then(() => {
     console.log("File written");
@@ -1974,19 +1974,21 @@ get("https://en.wikipedia.org/wiki/Robert_Cecil_Martin")
 
 ```javascript
 import { get } from "request-promise";
-import { writeFile } from "fs-promise";
+import { writeFile } from "fs-extra";
 
 async function getCleanCodeArticle() {
   try {
-    const response = await get(
+    const body = await get(
       "https://en.wikipedia.org/wiki/Robert_Cecil_Martin"
     );
-    await writeFile("article.html", response);
+    await writeFile("article.html", body);
     console.log("File written");
   } catch (err) {
     console.error(err);
   }
 }
+
+getCleanCodeArticle()
 ```
 
 **[⬆ back to top](#table-of-contents)**
@@ -2074,7 +2076,7 @@ getdata()
 
 Formatting is subjective. Like many rules herein, there is no hard and fast
 rule that you must follow. The main point is DO NOT ARGUE over formatting.
-There are [tons of tools](http://standardjs.com/rules.html) to automate this.
+There are [tons of tools](https://standardjs.com/rules.html) to automate this.
 Use one! It's a waste of time and money for engineers to argue over formatting.
 
 For things that don't fall under the purview of automatic formatting
@@ -2354,9 +2356,10 @@ This is also available in other languages:
 - ![br](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Brazil.png) **Brazilian Portuguese**: [fesnt/clean-code-javascript](https://github.com/fesnt/clean-code-javascript)
 - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Uruguay.png) **Spanish**: [andersontr15/clean-code-javascript](https://github.com/andersontr15/clean-code-javascript-es)
 - ![es](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Spain.png) **Spanish**: [tureey/clean-code-javascript](https://github.com/tureey/clean-code-javascript)
-- ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Chinese**:
+- ![cn](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/China.png) **Simplified Chinese**:
   - [alivebao/clean-code-js](https://github.com/alivebao/clean-code-js)
   - [beginor/clean-code-javascript](https://github.com/beginor/clean-code-javascript)
+- ![tw](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Taiwan.png) **Traditional Chinese**: [AllJointTW/clean-code-javascript](https://github.com/AllJointTW/clean-code-javascript)
 - ![de](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Germany.png) **German**: [marcbruederlin/clean-code-javascript](https://github.com/marcbruederlin/clean-code-javascript)
 - ![kr](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/South-Korea.png) **Korean**: [qkraudghgh/clean-code-javascript-ko](https://github.com/qkraudghgh/clean-code-javascript-ko)
 - ![pl](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Poland.png) **Polish**: [greg-dev/clean-code-javascript-pl](https://github.com/greg-dev/clean-code-javascript-pl)
@@ -2369,5 +2372,7 @@ This is also available in other languages:
   [andirkh/clean-code-javascript/](https://github.com/andirkh/clean-code-javascript/)
 - ![it](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Italy.png) **Italian**:
   [frappacchio/clean-code-javascript/](https://github.com/frappacchio/clean-code-javascript/)
-
+- ![bd](https://raw.githubusercontent.com/gosquared/flags/master/flags/flags/shiny/24/Bangladesh.png) **Bangla(বাংলা)**:
+  [InsomniacSabbir/clean-code-javascript/](https://github.com/InsomniacSabbir/clean-code-javascript/)
+    
 **[⬆ back to top](#table-of-contents)**
